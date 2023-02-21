@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--    加载数据库配置文件-->
+    <properties resource="db_config.properties"></properties>
+
+
+<!--    二级缓存-->
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 开启延迟加载（默认false） -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+    </settings>
+
+
+    <environments default="mysqlDB">
+        <environment id="mysqlDB">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="com.config.DruidDataSourceFactory">
+                <property name="driverClassName" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${user}"/>
+                <property name="password" value="${pass}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--    mapper文件注册-->
+    <mappers>
+        <mapper class="org.example.dao"/>
+        <mapper resource="mapper/BannerMapper.xml"></mapper>
+        <mapper resource="mapper/UserMapper.xml"></mapper>
+    </mappers>
+</configuration>
